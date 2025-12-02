@@ -82,12 +82,15 @@ local kp =
   },
   kubeStateMetrics: {
     prometheusRule: kubeStateMetrics($.values.kubeStateMetrics).prometheusRule,
+    mixin:: kubeStateMetrics($.values.kubeStateMetrics).mixin,
   },
   nodeExporter: {
     prometheusRule: nodeExporter($.values.nodeExporter).prometheusRule,
+    mixin:: nodeExporter($.values.nodeExporter).mixin,
   },
   kubernetesControlPlane: {
     prometheusRule: kubernetesControlPlane($.values.kubernetesControlPlane).prometheusRule,
+    mixin:: kubernetesControlPlane($.values.kubernetesControlPlane).mixin,
   },
   kubePrometheus: customMixin($.values.kubePrometheus),
 };
