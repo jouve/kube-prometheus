@@ -19,7 +19,7 @@ MD_FILES_TO_FORMAT=$(shell find docs developer-workspace examples experimental j
 
 KUBESCAPE_THRESHOLD=1
 
-all: generate fmt test docs
+all: fmt generate docs
 
 .PHONY: clean
 clean:

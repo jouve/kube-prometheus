@@ -879,7 +879,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-apiserver
     namespace: monitoring
 - apiVersion: v1
@@ -1693,7 +1693,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-cluster-total
     namespace: monitoring
 - apiVersion: v1
@@ -2297,7 +2297,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-controller-manager
     namespace: monitoring
 - apiVersion: v1
@@ -3863,7 +3863,7 @@ items:
                       "hide": 0,
                       "label": "cluster",
                       "name": "cluster",
-                      "query": "label_values(up{job=\"integrations/kubernetes/cadvisor\"}, cluster)",
+                      "query": "label_values(up{job=\"integrations/kubernetes/kube-state-metrics\"}, cluster)",
                       "refresh": 2,
                       "sort": 1,
                       "type": "query"
@@ -3884,7 +3884,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-k8s-resources-cluster
     namespace: monitoring
 - apiVersion: v1
@@ -4525,7 +4525,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-k8s-resources-multicluster
     namespace: monitoring
 - apiVersion: v1
@@ -6043,7 +6043,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-k8s-resources-namespace
     namespace: monitoring
 - apiVersion: v1
@@ -6724,7 +6724,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-k8s-resources-node
     namespace: monitoring
 - apiVersion: v1
@@ -8108,7 +8108,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-k8s-resources-pod
     namespace: monitoring
 - apiVersion: v1
@@ -8795,7 +8795,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-k8s-resources-windows-cluster
     namespace: monitoring
 - apiVersion: v1
@@ -9249,7 +9249,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-k8s-resources-windows-namespace
     namespace: monitoring
 - apiVersion: v1
@@ -9758,7 +9758,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-k8s-resources-windows-pod
     namespace: monitoring
 - apiVersion: v1
@@ -9823,7 +9823,7 @@ items:
                               "type": "prometheus",
                               "uid": "${datasource}"
                           },
-                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\", namespace=\"$namespace\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
+                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\", namespace=\"$namespace\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
                           "legendFormat": "__auto"
                       }
                   ],
@@ -9882,7 +9882,7 @@ items:
                               "type": "prometheus",
                               "uid": "${datasource}"
                           },
-                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\", namespace=\"$namespace\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
+                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\", namespace=\"$namespace\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
                           "format": "table",
                           "instant": true
                       },
@@ -9891,7 +9891,7 @@ items:
                               "type": "prometheus",
                               "uid": "${datasource}"
                           },
-                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_requests{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
+                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_requests{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
                           "format": "table",
                           "instant": true
                       },
@@ -9900,7 +9900,7 @@ items:
                               "type": "prometheus",
                               "uid": "${datasource}"
                           },
-                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\", namespace=\"$namespace\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n/sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_requests{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
+                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\", namespace=\"$namespace\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n/sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_requests{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
                           "format": "table",
                           "instant": true
                       },
@@ -9909,7 +9909,7 @@ items:
                               "type": "prometheus",
                               "uid": "${datasource}"
                           },
-                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_limits{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
+                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_limits{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
                           "format": "table",
                           "instant": true
                       },
@@ -9918,7 +9918,7 @@ items:
                               "type": "prometheus",
                               "uid": "${datasource}"
                           },
-                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\", namespace=\"$namespace\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n/sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_limits{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
+                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{cluster=\"$cluster\", namespace=\"$namespace\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n/sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_limits{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
                           "format": "table",
                           "instant": true
                       }
@@ -10013,7 +10013,7 @@ items:
                               "type": "prometheus",
                               "uid": "${datasource}"
                           },
-                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(container_memory_working_set_bytes{cluster=\"$cluster\", namespace=\"$namespace\", container!=\"\", image!=\"\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
+                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(container_memory_working_set_bytes{cluster=\"$cluster\", namespace=\"$namespace\", container!=\"\", image!=\"\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
                           "legendFormat": "__auto"
                       }
                   ],
@@ -10075,7 +10075,7 @@ items:
                               "type": "prometheus",
                               "uid": "${datasource}"
                           },
-                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(container_memory_working_set_bytes{cluster=\"$cluster\", namespace=\"$namespace\", container!=\"\", image!=\"\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
+                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(container_memory_working_set_bytes{cluster=\"$cluster\", namespace=\"$namespace\", container!=\"\", image!=\"\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
                           "format": "table",
                           "instant": true
                       },
@@ -10084,7 +10084,7 @@ items:
                               "type": "prometheus",
                               "uid": "${datasource}"
                           },
-                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_requests{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
+                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_requests{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
                           "format": "table",
                           "instant": true
                       },
@@ -10093,7 +10093,7 @@ items:
                               "type": "prometheus",
                               "uid": "${datasource}"
                           },
-                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(container_memory_working_set_bytes{cluster=\"$cluster\", namespace=\"$namespace\", container!=\"\", image!=\"\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n/sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_requests{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
+                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(container_memory_working_set_bytes{cluster=\"$cluster\", namespace=\"$namespace\", container!=\"\", image!=\"\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n/sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_requests{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
                           "format": "table",
                           "instant": true
                       },
@@ -10102,7 +10102,7 @@ items:
                               "type": "prometheus",
                               "uid": "${datasource}"
                           },
-                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_limits{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
+                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_limits{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
                           "format": "table",
                           "instant": true
                       },
@@ -10111,7 +10111,7 @@ items:
                               "type": "prometheus",
                               "uid": "${datasource}"
                           },
-                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(container_memory_working_set_bytes{cluster=\"$cluster\", namespace=\"$namespace\", container!=\"\", image!=\"\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n/sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_limits{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
+                          "expr": "sum(\n    max by (cluster, namespace, pod, container)(container_memory_working_set_bytes{cluster=\"$cluster\", namespace=\"$namespace\", container!=\"\", image!=\"\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n/sum(\n    max by (cluster, namespace, pod, container)(kube_pod_container_resource_limits{job=\"integrations/kubernetes/kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\"})\n  * on(cluster, namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload=~\"$workload\", workload_type=~\"$type\"}\n) by (pod)\n",
                           "format": "table",
                           "instant": true
                       }
@@ -10801,6 +10801,7 @@ items:
                           "uid": "${datasource}"
                       },
                       "hide": 0,
+                      "includeAll": true,
                       "label": "workload",
                       "name": "workload",
                       "query": "label_values(namespace_workload_pod:kube_pod_owner:relabel{cluster=\"$cluster\", namespace=\"$namespace\", workload_type=~\"$type\"}, workload)",
@@ -10824,7 +10825,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-k8s-resources-workload
     namespace: monitoring
 - apiVersion: v1
@@ -12087,7 +12088,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-k8s-resources-workloads-namespace
     namespace: monitoring
 - apiVersion: v1
@@ -12503,7 +12504,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-k8s-windows-cluster-rsrc-use
     namespace: monitoring
 - apiVersion: v1
@@ -13130,7 +13131,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-k8s-windows-node-rsrc-use
     namespace: monitoring
 - apiVersion: v1
@@ -14383,7 +14384,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-kubelet
     namespace: monitoring
 - apiVersion: v1
@@ -15023,7 +15024,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-namespace-by-pod
     namespace: monitoring
 - apiVersion: v1
@@ -15821,7 +15822,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-namespace-by-workload
     namespace: monitoring
 - apiVersion: v1
@@ -16414,7 +16415,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-node-cluster-rsrc-use
     namespace: monitoring
 - apiVersion: v1
@@ -17018,7 +17019,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-node-rsrc-use
     namespace: monitoring
 - apiVersion: v1
@@ -17741,7 +17742,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-nodes-aix
     namespace: monitoring
 - apiVersion: v1
@@ -18488,7 +18489,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-nodes-darwin
     namespace: monitoring
 - apiVersion: v1
@@ -19227,7 +19228,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-nodes
     namespace: monitoring
 - apiVersion: v1
@@ -19549,7 +19550,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-persistentvolumesusage
     namespace: monitoring
 - apiVersion: v1
@@ -20043,7 +20044,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-pod-total
     namespace: monitoring
 - apiVersion: v1
@@ -20698,7 +20699,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-proxy
     namespace: monitoring
 - apiVersion: v1
@@ -21299,7 +21300,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-scheduler
     namespace: monitoring
 - apiVersion: v1
@@ -21885,7 +21886,7 @@ items:
       app.kubernetes.io/component: grafana
       app.kubernetes.io/name: grafana
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 12.3.0
+      app.kubernetes.io/version: 12.3.1
     name: grafana-dashboard-workload-total
     namespace: monitoring
 kind: ConfigMapList
